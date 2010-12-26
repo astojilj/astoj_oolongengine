@@ -1,0 +1,251 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
+		8DD76F6A0486A84900D96B5E /* ENetTestServer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* ENetTestServer.1 */; };
+		D97C4FBB10F7961C0003B2CA /* callbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = D97C4FAC10F7961C0003B2CA /* callbacks.c */; };
+		D97C4FBC10F7961C0003B2CA /* host.c in Sources */ = {isa = PBXBuildFile; fileRef = D97C4FAF10F7961C0003B2CA /* host.c */; };
+		D97C4FBD10F7961C0003B2CA /* list.c in Sources */ = {isa = PBXBuildFile; fileRef = D97C4FB010F7961C0003B2CA /* list.c */; };
+		D97C4FBE10F7961C0003B2CA /* packet.c in Sources */ = {isa = PBXBuildFile; fileRef = D97C4FB210F7961C0003B2CA /* packet.c */; };
+		D97C4FBF10F7961C0003B2CA /* peer.c in Sources */ = {isa = PBXBuildFile; fileRef = D97C4FB310F7961C0003B2CA /* peer.c */; };
+		D97C4FC010F7961C0003B2CA /* protocol.c in Sources */ = {isa = PBXBuildFile; fileRef = D97C4FB410F7961C0003B2CA /* protocol.c */; };
+		D97C4FC110F7961C0003B2CA /* unix.c in Sources */ = {isa = PBXBuildFile; fileRef = D97C4FB810F7961C0003B2CA /* unix.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76F690486A84900D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				8DD76F6A0486A84900D96B5E /* ENetTestServer.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8DD76F6C0486A84900D96B5E /* ENetTestServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ENetTestServer; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6859E8B029090EE04C91782 /* ENetTestServer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = ENetTestServer.1; sourceTree = "<group>"; };
+		D97C4FAC10F7961C0003B2CA /* callbacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = callbacks.c; path = ../../../enet/callbacks.c; sourceTree = SOURCE_ROOT; };
+		D97C4FAD10F7961C0003B2CA /* callbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = callbacks.h; path = ../../../enet/callbacks.h; sourceTree = SOURCE_ROOT; };
+		D97C4FAE10F7961C0003B2CA /* enet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = enet.h; path = ../../../enet/enet.h; sourceTree = SOURCE_ROOT; };
+		D97C4FAF10F7961C0003B2CA /* host.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = host.c; path = ../../../enet/host.c; sourceTree = SOURCE_ROOT; };
+		D97C4FB010F7961C0003B2CA /* list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = list.c; path = ../../../enet/list.c; sourceTree = SOURCE_ROOT; };
+		D97C4FB110F7961C0003B2CA /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = list.h; path = ../../../enet/list.h; sourceTree = SOURCE_ROOT; };
+		D97C4FB210F7961C0003B2CA /* packet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = packet.c; path = ../../../enet/packet.c; sourceTree = SOURCE_ROOT; };
+		D97C4FB310F7961C0003B2CA /* peer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = peer.c; path = ../../../enet/peer.c; sourceTree = SOURCE_ROOT; };
+		D97C4FB410F7961C0003B2CA /* protocol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = protocol.c; path = ../../../enet/protocol.c; sourceTree = SOURCE_ROOT; };
+		D97C4FB510F7961C0003B2CA /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = protocol.h; path = ../../../enet/protocol.h; sourceTree = SOURCE_ROOT; };
+		D97C4FB610F7961C0003B2CA /* time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = time.h; path = ../../../enet/time.h; sourceTree = SOURCE_ROOT; };
+		D97C4FB710F7961C0003B2CA /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = types.h; path = ../../../enet/types.h; sourceTree = SOURCE_ROOT; };
+		D97C4FB810F7961C0003B2CA /* unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unix.c; path = ../../../enet/unix.c; sourceTree = SOURCE_ROOT; };
+		D97C4FB910F7961C0003B2CA /* unix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unix.h; path = ../../../enet/unix.h; sourceTree = SOURCE_ROOT; };
+		D97C4FBA10F7961C0003B2CA /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utility.h; path = ../../../enet/utility.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* ENetTestServer */ = {
+			isa = PBXGroup;
+			children = (
+				D97C4FAC10F7961C0003B2CA /* callbacks.c */,
+				D97C4FAD10F7961C0003B2CA /* callbacks.h */,
+				D97C4FAE10F7961C0003B2CA /* enet.h */,
+				D97C4FAF10F7961C0003B2CA /* host.c */,
+				D97C4FB010F7961C0003B2CA /* list.c */,
+				D97C4FB110F7961C0003B2CA /* list.h */,
+				D97C4FB210F7961C0003B2CA /* packet.c */,
+				D97C4FB310F7961C0003B2CA /* peer.c */,
+				D97C4FB410F7961C0003B2CA /* protocol.c */,
+				D97C4FB510F7961C0003B2CA /* protocol.h */,
+				D97C4FB610F7961C0003B2CA /* time.h */,
+				D97C4FB710F7961C0003B2CA /* types.h */,
+				D97C4FB810F7961C0003B2CA /* unix.c */,
+				D97C4FB910F7961C0003B2CA /* unix.h */,
+				D97C4FBA10F7961C0003B2CA /* utility.h */,
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6859E8C029090F304C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = ENetTestServer;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7796FE84155DC02AAC07 /* main.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* ENetTestServer */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6859E8C029090F304C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				C6859E8B029090EE04C91782 /* ENetTestServer.1 */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F620486A84900D96B5E /* ENetTestServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "ENetTestServer" */;
+			buildPhases = (
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				8DD76F690486A84900D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ENetTestServer;
+			productInstallPath = "$(HOME)/bin";
+			productName = ENetTestServer;
+			productReference = 8DD76F6C0486A84900D96B5E /* ENetTestServer */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "ENetTestServer" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* ENetTestServer */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76F620486A84900D96B5E /* ENetTestServer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F640486A84900D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DD76F650486A84900D96B5E /* main.cpp in Sources */,
+				D97C4FBB10F7961C0003B2CA /* callbacks.c in Sources */,
+				D97C4FBC10F7961C0003B2CA /* host.c in Sources */,
+				D97C4FBD10F7961C0003B2CA /* list.c in Sources */,
+				D97C4FBE10F7961C0003B2CA /* packet.c in Sources */,
+				D97C4FBF10F7961C0003B2CA /* peer.c in Sources */,
+				D97C4FC010F7961C0003B2CA /* protocol.c in Sources */,
+				D97C4FC110F7961C0003B2CA /* unix.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB923208733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_GLIBCXX_DEBUG=1",
+					"_GLIBCXX_DEBUG_PEDANTIC=1",
+				);
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = ENetTestServer;
+			};
+			name = Debug;
+		};
+		1DEB923308733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = ENetTestServer;
+			};
+			name = Release;
+		};
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "ENetTestServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923208733DC60010E9CD /* Debug */,
+				1DEB923308733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "ENetTestServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
