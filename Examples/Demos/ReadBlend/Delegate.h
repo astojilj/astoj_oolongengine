@@ -13,11 +13,12 @@
  3. This notice may not be removed or altered from any source distribution.
  */
 #import "GraphicsDevice.h"
+#import "TouchScreen.h"
 
 @interface AppController : NSObject
 {
 	UIWindow*			_window;
-	EAGLView*			_glView;
+	EAGLCameraView*			_glView;
 }
 
 

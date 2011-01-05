@@ -19,7 +19,7 @@
 
 
 #import <OpenGLES/EAGL.h>
-#import <OpenGLES/ES1/gl.h>
+#include "piper.h"
 
 #include "OolongReadBlend.h"
 #include "btBulletDynamicsCommon.h"
@@ -73,6 +73,10 @@ void norShortToFloat(const short *shnor, float *fnor)
 }
 
 
+// Index to bind the attributes to vertex shaders
+#define VERTEX_ARRAY	0
+#define TEXCOORD_ARRAY	1
+#define NORMAL_ARRAY	2
 
 
 struct BasicTexture
@@ -307,7 +311,7 @@ m_texture(0)
 
 void GfxObject::render()
 {
-	
+
 	if (m_texture)
 	{
 		m_texture->initOpenGLTexture();
@@ -319,27 +323,17 @@ void GfxObject::render()
 		//glDisable(GL_TEXTURE_GEN_T);
 		//glDisable(GL_TEXTURE_GEN_R);
 		
-	} else
+	} else 
 	{
 		glDisable(GL_TEXTURE_2D);
 	}
 	
-	glPushMatrix();
-	float m[16];
-	m_colObj->getWorldTransform().getOpenGLMatrix(m);
+	Piper::instance()->pushMatrix(Piper::MODEL);
+
+	MATRIX m;
+	m_colObj->getWorldTransform().getOpenGLMatrix(m.f);
+	Piper::instance()->multMatrix(m,Piper::MODEL);
 	
-	glMultMatrixf(m);
-		
-//	glScalef(0.1,0.1,0.1);
-	
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);	
-	glTexCoordPointer(2, GL_FLOAT, sizeof(GfxVertex), &m_vertices[0].m_uv[0]);
-	
-    glEnableClientState(GL_VERTEX_ARRAY);
-    
-    glColor4f(1, 1, 1, 1);
-    glVertexPointer(3, GL_FLOAT, sizeof(GfxVertex), &m_vertices[0].m_position.getX());
- //   glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 	
 	for (int i=0;i<m_indices.size();i++)
 	{
@@ -348,10 +342,30 @@ void GfxObject::render()
 			printf("out of bounds: m_indices[%d]=%d but m_vertices.size()=%d",i,m_indices[i],m_vertices.size());
 		}
 	}
-	glDrawElements(GL_TRIANGLES,m_indices.size(),GL_UNSIGNED_SHORT,&m_indices[0]);
-
-	glPopMatrix();
-
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+	if( __OPENGLES_VERSION >= 2 ) {
+		glEnableVertexAttribArray(VERTEX_ARRAY);
+		glVertexAttribPointer(VERTEX_ARRAY, 3, GL_FLOAT, GL_FALSE, sizeof(GfxVertex), &m_vertices[0].m_position.getX());	
+		
+		glEnableVertexAttribArray(NORMAL_ARRAY);
+		glVertexAttribPointer(NORMAL_ARRAY, 3, GL_FLOAT, GL_FALSE, sizeof(GfxVertex), &(m_vertices[0].m_normal.getX()));	
+		
+		glEnableVertexAttribArray(TEXCOORD_ARRAY);
+		glVertexAttribPointer(TEXCOORD_ARRAY, 2, GL_FLOAT, GL_FALSE, sizeof(GfxVertex), &m_vertices[0].m_uv[0]);
+	} else 
+#endif		
+	{
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);	
+		glTexCoordPointer(2, GL_FLOAT, sizeof(GfxVertex), &m_vertices[0].m_uv[0]);
+		
+		glEnableClientState(GL_VERTEX_ARRAY);
+		
+		glColor4f(1, 1, 1, 1);
+		glVertexPointer(3, GL_FLOAT, sizeof(GfxVertex), &m_vertices[0].m_position.getX());
+	}
+	Piper::instance()->glDrawElements(GL_TRIANGLES,m_indices.size(),GL_UNSIGNED_SHORT,&m_indices[0]);
+	
+	Piper::instance()->popMatrix(Piper::MODEL);
 }
 	
 

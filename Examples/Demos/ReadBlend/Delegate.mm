@@ -16,6 +16,7 @@
 #import "App.h"
 #import "Delegate.h"
 #include "Camera.h"
+#import "TouchScreen.h"
 
 //CONSTANTS:
 #define kFPS			60.0
@@ -46,7 +47,7 @@ static CShell *shell = NULL;
 	
 	// create the OpenGL view and add it to the window
 	//_glView = [[EAGLView alloc] initWithFrame:rect];
-	_glView = [[EAGLView alloc] initWithFrame:rect pixelFormat:GL_RGB565_OES depthFormat:GL_DEPTH_COMPONENT16_OES preserveBackbuffer:NO];
+	_glView = [[EAGLCameraView alloc] initWithFrame:rect pixelFormat:GL_RGB565_OES depthFormat:GL_DEPTH_COMPONENT16_OES preserveBackbuffer:NO];
 	
 	[_window addSubview:_glView];
 

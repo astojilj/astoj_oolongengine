@@ -12,6 +12,24 @@
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
 		651B1C641178EA1600C027B2 /* DeviceType.mm in Sources */ = {isa = PBXBuildFile; fileRef = 651B1C631178EA1600C027B2 /* DeviceType.mm */; };
+		A182CA2F12CA7B6200F008CB /* piperGL11.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A182CA2E12CA7B6200F008CB /* piperGL11.cpp */; };
+		A182CA3C12CA909000F008CB /* piperGL20.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A182CA3B12CA909000F008CB /* piperGL20.cpp */; };
+		A18F5A6712C7F484009EB720 /* EAGLView2.m in Sources */ = {isa = PBXBuildFile; fileRef = A18F5A6612C7F484009EB720 /* EAGLView2.m */; };
+		A18F5AAD12C86E49009EB720 /* TouchScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F5AAB12C86E49009EB720 /* TouchScreen.mm */; };
+		A1CBEB1612CF1C2B008684BB /* piper_p.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1CBEB1412CF1C2B008684BB /* piper_p.cpp */; };
+		A1CBECA112D05DF9008684BB /* shaderData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1CBEC9F12D05DF9008684BB /* shaderData.cpp */; };
+		A1CBED2D12D0F233008684BB /* Toon.frag in Sources */ = {isa = PBXBuildFile; fileRef = A1CBED2B12D0F233008684BB /* Toon.frag */; };
+		A1CBED2E12D0F233008684BB /* Toon.vert in Sources */ = {isa = PBXBuildFile; fileRef = A1CBED2C12D0F233008684BB /* Toon.vert */; };
+		A1CBED3512D0F268008684BB /* Color.frag in Sources */ = {isa = PBXBuildFile; fileRef = A1CBED3312D0F268008684BB /* Color.frag */; };
+		A1CBED3612D0F268008684BB /* Color.vert in Sources */ = {isa = PBXBuildFile; fileRef = A1CBED3412D0F268008684BB /* Color.vert */; };
+		A1CBED3712D0F273008684BB /* Color.frag in Resources */ = {isa = PBXBuildFile; fileRef = A1CBED3312D0F268008684BB /* Color.frag */; };
+		A1CBED3812D0F273008684BB /* Color.vert in Resources */ = {isa = PBXBuildFile; fileRef = A1CBED3412D0F268008684BB /* Color.vert */; };
+		A1CBED3B12D0F273008684BB /* Toon.frag in Resources */ = {isa = PBXBuildFile; fileRef = A1CBED2B12D0F233008684BB /* Toon.frag */; };
+		A1CBED3C12D0F273008684BB /* Toon.vert in Resources */ = {isa = PBXBuildFile; fileRef = A1CBED2C12D0F233008684BB /* Toon.vert */; };
+		A1CBED4212D111FF008684BB /* Texture.frag in Sources */ = {isa = PBXBuildFile; fileRef = A1CBED4012D111FF008684BB /* Texture.frag */; };
+		A1CBED4312D111FF008684BB /* Texture.vert in Sources */ = {isa = PBXBuildFile; fileRef = A1CBED4112D111FF008684BB /* Texture.vert */; };
+		A1CBED4412D11204008684BB /* Texture.frag in Resources */ = {isa = PBXBuildFile; fileRef = A1CBED4012D111FF008684BB /* Texture.frag */; };
+		A1CBED4512D11204008684BB /* Texture.vert in Resources */ = {isa = PBXBuildFile; fileRef = A1CBED4112D111FF008684BB /* Texture.vert */; };
 		BC068D681096509E00120032 /* btAxisSweep3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC068C341096509E00120032 /* btAxisSweep3.cpp */; };
 		BC068D691096509E00120032 /* btBroadphaseProxy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC068C371096509E00120032 /* btBroadphaseProxy.cpp */; };
 		BC068D6A1096509E00120032 /* btCollisionAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC068C391096509E00120032 /* btCollisionAlgorithm.cpp */; };
@@ -172,7 +190,6 @@
 		BC8518DB109630F200721ADB /* matrix_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC8518D1109630F200721ADB /* matrix_impl.cpp */; };
 		BC8518DC109630F200721ADB /* utility_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC8518D3109630F200721ADB /* utility_impl.cpp */; };
 		BC8519AF1096317000721ADB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC8519AE1096317000721ADB /* CoreGraphics.framework */; };
-		BC8519B9109631B700721ADB /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8519B8109631B700721ADB /* EAGLView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -185,6 +202,45 @@
 		651B1C621178EA1600C027B2 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
 		651B1C631178EA1600C027B2 /* DeviceType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceType.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ReadBlend-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ReadBlend-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		A182CA2D12CA7B6200F008CB /* piper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = piper.h; sourceTree = "<group>"; };
+		A182CA2E12CA7B6200F008CB /* piperGL11.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = piperGL11.cpp; sourceTree = "<group>"; };
+		A182CA3A12CA909000F008CB /* piperGL20.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = piperGL20.h; sourceTree = "<group>"; };
+		A182CA3B12CA909000F008CB /* piperGL20.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = piperGL20.cpp; sourceTree = "<group>"; };
+		A182CA3D12CA90B200F008CB /* piperGL11.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = piperGL11.h; sourceTree = "<group>"; };
+		A18F5A6612C7F484009EB720 /* EAGLView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView2.m; sourceTree = "<group>"; };
+		A18F5A8E12C86B32009EB720 /* Accelerometer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Accelerometer.h; sourceTree = "<group>"; };
+		A18F5A8F12C86B32009EB720 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
+		A18F5A9012C86B32009EB720 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
+		A18F5A9112C86B32009EB720 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		A18F5A9212C86B32009EB720 /* Culling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Culling.h; sourceTree = "<group>"; };
+		A18F5A9312C86B32009EB720 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
+		A18F5A9412C86B32009EB720 /* Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Geometry.h; sourceTree = "<group>"; };
+		A18F5A9512C86B32009EB720 /* GraphicsDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsDevice.h; sourceTree = "<group>"; };
+		A18F5A9612C86B32009EB720 /* Log_retired.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log_retired.h; sourceTree = "<group>"; };
+		A18F5A9712C86B32009EB720 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		A18F5A9812C86B32009EB720 /* Mathematics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mathematics.h; sourceTree = "<group>"; };
+		A18F5A9912C86B32009EB720 /* MemoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryManager.h; sourceTree = "<group>"; };
+		A18F5A9A12C86B32009EB720 /* OolongEngine2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OolongEngine2.h; sourceTree = "<group>"; };
+		A18F5A9B12C86B32009EB720 /* Pathes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pathes.h; sourceTree = "<group>"; };
+		A18F5A9C12C86B32009EB720 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
+		A18F5A9D12C86B32009EB720 /* Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resource.h; sourceTree = "<group>"; };
+		A18F5A9E12C86B32009EB720 /* Timing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timing.h; sourceTree = "<group>"; };
+		A18F5A9F12C86B32009EB720 /* TouchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchScreen.h; sourceTree = "<group>"; };
+		A18F5AA012C86B32009EB720 /* Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Type.h; sourceTree = "<group>"; };
+		A18F5AA112C86B32009EB720 /* UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UI.h; sourceTree = "<group>"; };
+		A18F5AA812C86E49009EB720 /* RotateObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotateObject.h; sourceTree = "<group>"; };
+		A18F5AAA12C86E49009EB720 /* TouchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchScreen.h; sourceTree = "<group>"; };
+		A18F5AAB12C86E49009EB720 /* TouchScreen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchScreen.mm; sourceTree = "<group>"; };
+		A1CBEB1412CF1C2B008684BB /* piper_p.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = piper_p.cpp; sourceTree = "<group>"; };
+		A1CBEB1512CF1C2B008684BB /* piper_p.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = piper_p.h; sourceTree = "<group>"; };
+		A1CBEC9F12D05DF9008684BB /* shaderData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shaderData.cpp; sourceTree = "<group>"; };
+		A1CBECA012D05DF9008684BB /* shaderData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shaderData.h; sourceTree = "<group>"; };
+		A1CBED2B12D0F233008684BB /* Toon.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Toon.frag; path = "../../Renderer/Tutorials/08 Shaders Demo (3DShaders.com)/Classes/Shader/3DShaders.com/Toon.frag"; sourceTree = SOURCE_ROOT; };
+		A1CBED2C12D0F233008684BB /* Toon.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Toon.vert; path = "../../Renderer/Tutorials/08 Shaders Demo (3DShaders.com)/Classes/Shader/3DShaders.com/Toon.vert"; sourceTree = SOURCE_ROOT; };
+		A1CBED3312D0F268008684BB /* Color.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Color.frag; path = "../../Renderer/Tutorials/08 Shaders Demo (3DShaders.com)/Classes/Shader/Basic/Color.frag"; sourceTree = SOURCE_ROOT; };
+		A1CBED3412D0F268008684BB /* Color.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Color.vert; path = "../../Renderer/Tutorials/08 Shaders Demo (3DShaders.com)/Classes/Shader/Basic/Color.vert"; sourceTree = SOURCE_ROOT; };
+		A1CBED4012D111FF008684BB /* Texture.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Texture.frag; path = "../../Renderer/Tutorials/08 Shaders Demo (3DShaders.com)/Classes/Shader/Basic/Texture.frag"; sourceTree = SOURCE_ROOT; };
+		A1CBED4112D111FF008684BB /* Texture.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Texture.vert; path = "../../Renderer/Tutorials/08 Shaders Demo (3DShaders.com)/Classes/Shader/Basic/Texture.vert"; sourceTree = SOURCE_ROOT; };
 		BC068C2F1096509E00120032 /* btBulletCollisionCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletCollisionCommon.h; sourceTree = "<group>"; };
 		BC068C301096509E00120032 /* btBulletDynamicsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btBulletDynamicsCommon.h; sourceTree = "<group>"; };
 		BC068C311096509E00120032 /* Bullet-C-Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bullet-C-Api.h"; sourceTree = "<group>"; };
@@ -899,7 +955,6 @@
 		BC8518D4109630F200721ADB /* utility_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility_impl.h; sourceTree = "<group>"; };
 		BC8518D5109630F200721ADB /* vfp_clobbers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vfp_clobbers.h; sourceTree = "<group>"; };
 		BC8519AE1096317000721ADB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = "../../Renderer/Tutorials/02 Texture/iphoneos2.0/System/Library/Frameworks/CoreGraphics.framework"; sourceTree = SOURCE_ROOT; };
-		BC8519B8109631B700721ADB /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EAGLView.m; path = ../../../Renderer/Core/GraphicsDevice/GLES11/EAGLView.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -936,6 +991,12 @@
 		2514C27610084DB600A42282 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				A1CBED4012D111FF008684BB /* Texture.frag */,
+				A1CBED4112D111FF008684BB /* Texture.vert */,
+				A1CBED3312D0F268008684BB /* Color.frag */,
+				A1CBED3412D0F268008684BB /* Color.vert */,
+				A1CBED2B12D0F233008684BB /* Toon.frag */,
+				A1CBED2C12D0F233008684BB /* Toon.vert */,
 			);
 			name = Shaders;
 			sourceTree = "<group>";
@@ -943,6 +1004,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				A18F5AA712C86E49009EB720 /* TouchScreen */,
+				A18F5A8D12C86B32009EB720 /* Include */,
 				BC0E670E1156D3B10094B477 /* BulletBlendReaderNew.h */,
 				BC0E670F1156D3B10094B477 /* BulletBlendReaderNew.cpp */,
 				BC8517F110962D8C00721ADB /* main.m */,
@@ -1015,6 +1078,61 @@
 			);
 			name = "Resources-iPad";
 			sourceTree = "<group>";
+		};
+		A182CA2A12CA795E00F008CB /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				A1CBEC9F12D05DF9008684BB /* shaderData.cpp */,
+				A1CBECA012D05DF9008684BB /* shaderData.h */,
+				A1CBEB1412CF1C2B008684BB /* piper_p.cpp */,
+				A1CBEB1512CF1C2B008684BB /* piper_p.h */,
+				A182CA2D12CA7B6200F008CB /* piper.h */,
+				A182CA2E12CA7B6200F008CB /* piperGL11.cpp */,
+				A182CA3A12CA909000F008CB /* piperGL20.h */,
+				A182CA3B12CA909000F008CB /* piperGL20.cpp */,
+				A182CA3D12CA90B200F008CB /* piperGL11.h */,
+			);
+			name = Renderer;
+			sourceTree = "<group>";
+		};
+		A18F5A8D12C86B32009EB720 /* Include */ = {
+			isa = PBXGroup;
+			children = (
+				A18F5A8E12C86B32009EB720 /* Accelerometer.h */,
+				A18F5A8F12C86B32009EB720 /* App.h */,
+				A18F5A9012C86B32009EB720 /* Audio.h */,
+				A18F5A9112C86B32009EB720 /* Camera.h */,
+				A18F5A9212C86B32009EB720 /* Culling.h */,
+				A18F5A9312C86B32009EB720 /* DeviceType.h */,
+				A18F5A9412C86B32009EB720 /* Geometry.h */,
+				A18F5A9512C86B32009EB720 /* GraphicsDevice.h */,
+				A18F5A9612C86B32009EB720 /* Log_retired.h */,
+				A18F5A9712C86B32009EB720 /* Macros.h */,
+				A18F5A9812C86B32009EB720 /* Mathematics.h */,
+				A18F5A9912C86B32009EB720 /* MemoryManager.h */,
+				A18F5A9A12C86B32009EB720 /* OolongEngine2.h */,
+				A18F5A9B12C86B32009EB720 /* Pathes.h */,
+				A18F5A9C12C86B32009EB720 /* Profile.h */,
+				A18F5A9D12C86B32009EB720 /* Resource.h */,
+				A18F5A9E12C86B32009EB720 /* Timing.h */,
+				A18F5A9F12C86B32009EB720 /* TouchScreen.h */,
+				A18F5AA012C86B32009EB720 /* Type.h */,
+				A18F5AA112C86B32009EB720 /* UI.h */,
+			);
+			name = Include;
+			path = ../../../Include;
+			sourceTree = SOURCE_ROOT;
+		};
+		A18F5AA712C86E49009EB720 /* TouchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A18F5AA812C86E49009EB720 /* RotateObject.h */,
+				A18F5AAA12C86E49009EB720 /* TouchScreen.h */,
+				A18F5AAB12C86E49009EB720 /* TouchScreen.mm */,
+			);
+			name = TouchScreen;
+			path = ../../../Input/TouchScreen;
+			sourceTree = SOURCE_ROOT;
 		};
 		BC068C2E1096509E00120032 /* src */ = {
 			isa = PBXGroup;
@@ -1786,6 +1904,7 @@
 		BC8517F710962DA500721ADB /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
+				A182CA2A12CA795E00F008CB /* Renderer */,
 				BC8517F810962DA500721ADB /* Camera */,
 				BC8517F910962DA500721ADB /* Core */,
 				BC85181110962DA500721ADB /* Culling */,
@@ -1828,7 +1947,7 @@
 		BC8517FF10962DA500721ADB /* GLES20 */ = {
 			isa = PBXGroup;
 			children = (
-				BC8519B8109631B700721ADB /* EAGLView.m */,
+				A18F5A6612C7F484009EB720 /* EAGLView2.m */,
 				BC85180010962DA500721ADB /* EAGLView2.h */,
 				BC85180210962DA500721ADB /* OpenGL_Internal.h */,
 			);
@@ -2038,6 +2157,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1CBED4412D11204008684BB /* Texture.frag in Resources */,
+				A1CBED4512D11204008684BB /* Texture.vert in Resources */,
+				A1CBED3712D0F273008684BB /* Color.frag in Resources */,
+				A1CBED3812D0F273008684BB /* Color.vert in Resources */,
+				A1CBED3B12D0F273008684BB /* Toon.frag in Resources */,
+				A1CBED3C12D0F273008684BB /* Toon.vert in Resources */,
 				BC8517DB10962CB800721ADB /* Default.png in Resources */,
 				BC8517DD10962CB800721ADB /* icon.png in Resources */,
 				BC85187610962E6C00721ADB /* readme.txt in Resources */,
@@ -2078,7 +2203,6 @@
 				BC8518DA109630F200721ADB /* Vector.cpp in Sources */,
 				BC8518DB109630F200721ADB /* matrix_impl.cpp in Sources */,
 				BC8518DC109630F200721ADB /* utility_impl.cpp in Sources */,
-				BC8519B9109631B700721ADB /* EAGLView.m in Sources */,
 				BC068D681096509E00120032 /* btAxisSweep3.cpp in Sources */,
 				BC068D691096509E00120032 /* btBroadphaseProxy.cpp in Sources */,
 				BC068D6A1096509E00120032 /* btCollisionAlgorithm.cpp in Sources */,
@@ -2209,6 +2333,18 @@
 				BC0E656C1156CD8F0094B477 /* bBlenderFile.cpp in Sources */,
 				BC0E67101156D3B10094B477 /* BulletBlendReaderNew.cpp in Sources */,
 				651B1C641178EA1600C027B2 /* DeviceType.mm in Sources */,
+				A18F5A6712C7F484009EB720 /* EAGLView2.m in Sources */,
+				A18F5AAD12C86E49009EB720 /* TouchScreen.mm in Sources */,
+				A182CA2F12CA7B6200F008CB /* piperGL11.cpp in Sources */,
+				A182CA3C12CA909000F008CB /* piperGL20.cpp in Sources */,
+				A1CBEB1612CF1C2B008684BB /* piper_p.cpp in Sources */,
+				A1CBECA112D05DF9008684BB /* shaderData.cpp in Sources */,
+				A1CBED2D12D0F233008684BB /* Toon.frag in Sources */,
+				A1CBED2E12D0F233008684BB /* Toon.vert in Sources */,
+				A1CBED3512D0F268008684BB /* Color.frag in Sources */,
+				A1CBED3612D0F268008684BB /* Color.vert in Sources */,
+				A1CBED4212D111FF008684BB /* Texture.frag in Sources */,
+				A1CBED4312D111FF008684BB /* Texture.vert in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2230,13 +2366,17 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ReadBlend_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					_FORCE_OPENGLES11_disabled,
+				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "ReadBlend-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = ReadBlend;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C097EB91-1235-4003-A704-2E744AC4B277";
-				SDKROOT = iphoneos3.2;
+				SDKROOT = iphonesimulator4.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;

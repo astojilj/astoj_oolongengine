@@ -34,7 +34,8 @@ subject to the following restrictions:
 
 #include <stdio.h>
 #include <sys/time.h>
-
+#include "piper.h"
+#include "Vector.h"
 
 
 class OolongBulletBlendReader* blendReader = 0;
@@ -54,8 +55,6 @@ structTimer DrawUITimer;
 float DrawUIT;
 
 GLuint texID_rock=-1;
-
-
 
 ///AppleGetBundleDirectory is needed to access the .blend file from the Bundle file
 #define MAXPATHLEN 512
@@ -148,6 +147,15 @@ bool CShell::InitApplication()
 		printf("Error: cannot open file: %s\n",fullName);
 	}
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+	if( __OPENGLES_VERSION >= 2 ) {
+		Piper::initInstance(false);
+	} else 
+#endif		
+	{
+		Piper::initInstance(true); 
+	}
+		
 	
 	///some testing to create textures programmatically/from memory buffer
 	GLubyte*	image=(GLubyte*)malloc(256*256*4*sizeof(int));
@@ -203,14 +211,12 @@ bool CShell::UpdateScene()
     glEnable(GL_DEPTH_TEST);
 	glClearColor(0.3f, 0.3f, 0.4f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
+
 	// Set the OpenGL projection matrix
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	
 	MATRIX	MyPerspMatrix;
-	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt((WindowHeight / WindowWidth)), f2vt(0.1f), f2vt(1000.0f), 0);
-	glMultMatrixf(MyPerspMatrix.f);
+	MatrixPerspectiveFovRH(MyPerspMatrix, f2vt(70), f2vt((WindowHeight / WindowWidth)), f2vt(0.1f), f2vt(1000.0f), 1);
+	Piper::instance()->setMatrix(MyPerspMatrix, Piper::PROJECTION);
+
 
 	++frames;
 
@@ -220,14 +226,10 @@ bool CShell::UpdateScene()
 
 	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f Cube: %3.2fms UI: %3.2fms", frameRate, DrawCubeT, DrawUIT);
 
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	glRotatef(-90.0, 0.0, 0.0, 1.0);
 	
-	float m[16];
-	blendReader->m_cameraTrans.inverse().getOpenGLMatrix(m);
-	glMultMatrixf(m);
+	MATRIX m;
+	blendReader->m_cameraTrans.inverse().getOpenGLMatrix(m.f);
+	Piper::instance()->setMatrix(m, Piper::MODEL);
 	
 	return true;
 }

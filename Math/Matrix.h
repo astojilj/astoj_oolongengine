@@ -22,6 +22,7 @@ subject to the following restrictions:
 #ifndef MATRIX_H_
 #define MATRIX_H_
 
+#include <string.h>
 #include "Vector.h"
 #include "Quaternion.h"
 
@@ -87,6 +88,14 @@ struct Matrix4x4
 class MATRIX
 {
 public:
+	MATRIX()
+	{
+	}
+	MATRIX(const float m[16]) 
+	{
+		memcpy(&f, &m, 16 * sizeof(float));
+	}
+	
     float* operator [] ( const int Row )
 	{
 		return &f[Row<<2];

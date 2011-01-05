@@ -15,8 +15,8 @@ void main (void)
 {
 	vec3 DiffuseColor = vec3(0.0, 0.25, 1.0);
 	vec3 PhongColor = vec3(0.75, 0.75, 1.0);
-	float Edge = 0.5;
-	float Phong = 0.98;
+	float Edge = 0.4;
+	float Phong = 0.97;
 
 	vec3 n = normalize( v_Normal );
 	

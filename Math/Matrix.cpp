@@ -40,14 +40,14 @@ subject to the following restrictions:
 #endif
 #endif
 
-static const MATRIX	c_mIdentity = {
+static const MATRIX	c_mIdentity((float [16])
 	{
 	1, 0, 0, 0,
 	0, 1, 0, 0,
 	0, 0, 1, 0,
 	0, 0, 0, 1
 	}
-};
+);
 
 void MatrixIdentity(MATRIX &mOut)
 {
