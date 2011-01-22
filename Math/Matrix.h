@@ -321,6 +321,8 @@ void MatrixQuaternionSlerp(
 	const float				t);
 
 
+float MatrixDeterminant(const MATRIX &mIn);
+
 void MatrixQuaternionNormalize(QUATERNION &quat);
 
 //
@@ -341,6 +343,10 @@ void MatrixQuaternionNormalize(QUATERNION &quat);
 void MatrixRotationQuaternion(
 	MATRIX				&mOut,
 	const QUATERNION	&quat);
+
+void MatrixToQuaternion(	
+    QUATERNION	&qOut,
+	const MATRIX &mIn);
 
 void MatrixQuaternionMultiply(
 	QUATERNION			&qOut,

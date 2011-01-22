@@ -16,6 +16,7 @@
 		A182CA3C12CA909000F008CB /* piperGL20.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A182CA3B12CA909000F008CB /* piperGL20.cpp */; };
 		A18F5A6712C7F484009EB720 /* EAGLView2.m in Sources */ = {isa = PBXBuildFile; fileRef = A18F5A6612C7F484009EB720 /* EAGLView2.m */; };
 		A18F5AAD12C86E49009EB720 /* TouchScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = A18F5AAB12C86E49009EB720 /* TouchScreen.mm */; };
+		A1B416AC12DE45A000EB6F1D /* transformInterpolator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1B416AB12DE45A000EB6F1D /* transformInterpolator.cpp */; };
 		A1CBEB1612CF1C2B008684BB /* piper_p.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1CBEB1412CF1C2B008684BB /* piper_p.cpp */; };
 		A1CBECA112D05DF9008684BB /* shaderData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1CBEC9F12D05DF9008684BB /* shaderData.cpp */; };
 		A1CBED2D12D0F233008684BB /* Toon.frag in Sources */ = {isa = PBXBuildFile; fileRef = A1CBED2B12D0F233008684BB /* Toon.frag */; };
@@ -231,6 +232,8 @@
 		A18F5AA812C86E49009EB720 /* RotateObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotateObject.h; sourceTree = "<group>"; };
 		A18F5AAA12C86E49009EB720 /* TouchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchScreen.h; sourceTree = "<group>"; };
 		A18F5AAB12C86E49009EB720 /* TouchScreen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchScreen.mm; sourceTree = "<group>"; };
+		A1B416AA12DE45A000EB6F1D /* transformInterpolator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transformInterpolator.h; sourceTree = "<group>"; };
+		A1B416AB12DE45A000EB6F1D /* transformInterpolator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transformInterpolator.cpp; sourceTree = "<group>"; };
 		A1CBEB1412CF1C2B008684BB /* piper_p.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = piper_p.cpp; sourceTree = "<group>"; };
 		A1CBEB1512CF1C2B008684BB /* piper_p.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = piper_p.h; sourceTree = "<group>"; };
 		A1CBEC9F12D05DF9008684BB /* shaderData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shaderData.cpp; sourceTree = "<group>"; };
@@ -1091,6 +1094,8 @@
 				A182CA3A12CA909000F008CB /* piperGL20.h */,
 				A182CA3B12CA909000F008CB /* piperGL20.cpp */,
 				A182CA3D12CA90B200F008CB /* piperGL11.h */,
+				A1B416AA12DE45A000EB6F1D /* transformInterpolator.h */,
+				A1B416AB12DE45A000EB6F1D /* transformInterpolator.cpp */,
 			);
 			name = Renderer;
 			sourceTree = "<group>";
@@ -2345,6 +2350,7 @@
 				A1CBED3612D0F268008684BB /* Color.vert in Sources */,
 				A1CBED4212D111FF008684BB /* Texture.frag in Sources */,
 				A1CBED4312D111FF008684BB /* Texture.vert in Sources */,
+				A1B416AC12DE45A000EB6F1D /* transformInterpolator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

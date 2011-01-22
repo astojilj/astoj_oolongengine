@@ -43,6 +43,9 @@ protected:
 	
 	btHashMap<btHashPtr,btCollisionObject*>	m_blenderObj2colObj;
 	
+	btHashMap<btHashString,btCollisionObject*>	m_blenderObjectName2colObj;
+	
+	
 
 //	btHashMap<btHashInt,btDataObject*>	m_dataObjects;
 
@@ -67,6 +70,7 @@ public:
 
 	int		writeFile(const char* fileName);
 
+	void	convertAllObjects(int verboseDumpAllBlocks, btAlignedObjectArray<const char*> buildNameHashForTheseObjects);
 	void	convertAllObjects(int verboseDumpAllBlocks=false);
 
 	virtual	void	convertConstraints();
@@ -83,6 +87,11 @@ public:
 	virtual	void	addLight(Blender::Object* tmpObject)=0;
 
 	class btRigidBody& getFixedBody();
+	
+	// offers access only to objects from named cache - convertAllObjects(int verboseDumpAllBlocks, btAlignedObjectArray<char*> buildNameHashForTheseObjects)
+	// object name is blender object name
+	btCollisionObject* collisionObject(const char *objectName);
+
 };
 
 #endif //__BULLET_BLEND_NEW_H

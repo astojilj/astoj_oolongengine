@@ -70,9 +70,12 @@ int		BulletBlendReaderNew::writeFile(const char* fileName)
 	return m_blendFile->write(fileName);
 }
 
-
-
 void	BulletBlendReaderNew::convertAllObjects(int verboseDumpAllBlocks)
+{
+    convertAllObjects(verboseDumpAllBlocks, btAlignedObjectArray<const char*>());
+}
+
+void BulletBlendReaderNew::convertAllObjects(int verboseDumpAllBlocks, btAlignedObjectArray<const char*> buildNameHashForTheseObjects)
 {
 	btAssert(m_blendFile);
 
@@ -177,6 +180,17 @@ void	BulletBlendReaderNew::convertAllObjects(int verboseDumpAllBlocks)
 								btCollisionObject* bulletObject = createBulletObject(ob);
 								m_colObj2BlenderObj.insert(bulletObject,ob);
 								m_blenderObj2colObj.insert(ob,bulletObject);
+								
+								for (int in = 0; in < buildNameHashForTheseObjects.size(); in++) {
+									const char* stringAtIndex(buildNameHashForTheseObjects[in]);
+									if (!strcmp(stringAtIndex, me->id.name)) {
+										m_blenderObjectName2colObj.insert(stringAtIndex, bulletObject);
+										// dont search for found one anymore
+										buildNameHashForTheseObjects.swap(in, buildNameHashForTheseObjects.size()-1);
+										buildNameHashForTheseObjects.pop_back();
+										break;
+									}
+								}
 								
 							}
 						}break;
@@ -620,4 +634,14 @@ void	BulletBlendReaderNew::convertConstraints()
 		}
 	}
 }
+	
+btCollisionObject*	BulletBlendReaderNew::collisionObject(const char *objectName)
+{
+	btCollisionObject** pColObj = m_blenderObjectName2colObj.find(objectName);
+	if (pColObj) 
+		return *pColObj;
+	return 0;
+	
+}
+	
 

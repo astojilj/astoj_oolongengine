@@ -36,11 +36,15 @@ subject to the following restrictions:
 #include <sys/time.h>
 #include "piper.h"
 #include "Vector.h"
+#include "transformInterpolator.h"
 
 
 class OolongBulletBlendReader* blendReader = 0;
 class btDiscreteDynamicsWorld* dynamicsWorld = 0;
 
+const float CameraDistanceFromBall = 2.5;
+TransformInterpolator *cameraAnimation = 0;
+float sceneSlowdownWhileAnimatingCamera = 1;  // 1 no slowdown
 
 CDisplayText * AppDisplayText;
 int iCurrentTick = 0, iStartTick = 0, iFps = 0, iFrames = 0;
@@ -55,6 +59,10 @@ structTimer DrawUITimer;
 float DrawUIT;
 
 GLuint texID_rock=-1;
+
+static Vec3 vTarget;
+
+
 
 ///AppleGetBundleDirectory is needed to access the .blend file from the Bundle file
 #define MAXPATHLEN 512
@@ -73,6 +81,7 @@ char* AppleGetBundleDirectory(void) {
 	return path;
 }
 
+void modelTransformWhenCameraIsBehindTheBall(MATRIX &mBehindTheBall);
 
 bool CShell::InitApplication()
 {
@@ -138,7 +147,10 @@ bool CShell::InitApplication()
 		bool verboseDumpAllTypes = false;
 		if (blendReader->readFile(memoryBuffer,fileLen, verboseDumpAllTypes))
 		{
-			blendReader->convertAllObjects(verboseDumpAllTypes);
+			btAlignedObjectArray<const char*> keyActors;
+			keyActors.push_back("MESphere");
+			keyActors.push_back("MECube.013");
+			blendReader->convertAllObjects(verboseDumpAllTypes, keyActors);
 		} else {
 			printf("Error: invalid/unreadable file: %s\n",fullName);
 		}
@@ -186,18 +198,66 @@ bool CShell::InitApplication()
 	
 	glDisable(GL_COLOR_MATERIAL);
 	
+	// target initialization - what needs to be hit by the ball and where to look
+	btCollisionObject *target = blendReader->collisionObject("MECube.013");
+	if (target) {
+		vTarget = target->getWorldTransform().getOrigin().m_floats;
+	} else {
+		printf("Object MECube.013 used for target not found in blender file");
+		assert(false);
+	}
+	sceneSlowdownWhileAnimatingCamera = 0; // no stepping the model while initial camera animation
+	
+	// on startup, camera should animate from position set in blend file to position right behind the ball
+	MATRIX mBehindTheBall;
+	modelTransformWhenCameraIsBehindTheBall(mBehindTheBall);
+	MATRIX mCamera;
+	blendReader->m_cameraTrans.inverse().getOpenGLMatrix(mCamera.f);
+	cameraAnimation = new TransformInterpolator(mCamera, mBehindTheBall, 200);
 	return true;
 }
-
-
 
 bool CShell::QuitApplication()
 {
 	AppDisplayText->ReleaseTextures();
 	
 	delete AppDisplayText;
+	delete blendReader;
+	blendReader = 0;
 
 	return true;
+}
+
+void modelTransformWhenCameraIsBehindTheBall(MATRIX &mBehindTheBall)
+{
+	btCollisionObject *ball = blendReader->collisionObject("MESphere");
+	Vec3 vFrom = ball->getWorldTransform().getOrigin().m_floats;
+	Vec3 vDirection;
+	MatrixVec3Normalize(vDirection, (vFrom - vTarget));
+	vFrom = vFrom + CameraDistanceFromBall * vDirection;
+	MatrixLookAtRH(mBehindTheBall, vFrom, vTarget, Vec3(0,1,0));
+}
+
+/* 
+ * Calculates current model transform, used when rendering scene - camera is in (0,0,0) and model transform is
+ * pushed before pushing meshes transforms to model mode matrixstack.
+ */
+static MATRIX modelTransform(MATRIX &mOut) 
+{
+	// if there is camera animation
+	if (cameraAnimation) {
+		mOut = cameraAnimation->current();
+		if (cameraAnimation->finished()) {
+			delete cameraAnimation;
+			cameraAnimation = 0;
+			sceneSlowdownWhileAnimatingCamera = 1;
+		}
+	}
+	else 
+		// else camera is CameraDistanceFromBall metres behind the ball and look at direction of target
+	{
+		modelTransformWhenCameraIsBehindTheBall(mOut);
+	}
 }
 
 bool CShell::UpdateScene()
@@ -226,9 +286,8 @@ bool CShell::UpdateScene()
 
 	AppDisplayText->DisplayText(0, 6, 0.4f, RGBA(255,255,255,255), "fps: %3.2f Cube: %3.2fms UI: %3.2fms", frameRate, DrawCubeT, DrawUIT);
 
-	
 	MATRIX m;
-	blendReader->m_cameraTrans.inverse().getOpenGLMatrix(m.f);
+	modelTransform(m);
 	Piper::instance()->setMatrix(m, Piper::MODEL);
 	
 	return true;
@@ -237,13 +296,15 @@ bool CShell::UpdateScene()
 
 bool CShell::RenderScene()
 {
-	
 	for (int i=0;i<blendReader->m_graphicsObjects.size();i++)
 	{
 		blendReader->m_graphicsObjects[i].render();
 	}
-   
-	dynamicsWorld->stepSimulation(1./60.);
+	
+	if (sceneSlowdownWhileAnimatingCamera)
+		dynamicsWorld->stepSimulation(sceneSlowdownWhileAnimatingCamera * 1./60.);
+	if (cameraAnimation)
+		cameraAnimation->step();
 	
 	DrawCubeT = GetAverageTimeValueInMS(&DrawCubeTimer);
 	

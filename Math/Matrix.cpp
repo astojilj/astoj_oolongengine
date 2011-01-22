@@ -274,19 +274,14 @@ void MatrixTranspose(
 	mOut = mTmp;
 }
 
-
-
-void MatrixInverse(
-	MATRIX			&mOut,
-	const MATRIX	&mIn)
+float MatrixDeterminant(const MATRIX &mIn)
 {
-	MATRIX	mDummyMatrix;
 	double		det_1;
 	double		pos, neg, temp;
-
+	
     /* Calculate the determinant of submatrix A and determine if the
-       the matrix is singular as limited by the double precision
-       floating-point data representation. */
+	 the matrix is singular as limited by the double precision
+	 floating-point data representation. */
     pos = neg = 0.0;
     temp =  mIn.f[ 0] * mIn.f[ 5] * mIn.f[10];
     if (temp >= 0.0) pos += temp; else neg += temp;
@@ -301,10 +296,21 @@ void MatrixInverse(
     temp = -mIn.f[ 0] * mIn.f[ 9] * mIn.f[ 6];
     if (temp >= 0.0) pos += temp; else neg += temp;
     det_1 = pos + neg;
+    if ((det_1 == 0.0) || (_ABS(det_1 / (pos - neg)) < 1.0e-15)) {
+		return 0;
+	}
+	return det_1;
+}
+
+void MatrixInverse(
+	MATRIX			&mOut,
+	const MATRIX	&mIn)
+{
+	MATRIX	mDummyMatrix;
+	double		det_1 = MatrixDeterminant(mIn);
 
     /* Is the submatrix A singular? */
-    if ((det_1 == 0.0) || (_ABS(det_1 / (pos - neg)) < 1.0e-15))
-	{
+    if ((det_1 == 0.0))	{
         /* Matrix M has no inverse */
         printf("Matrix has no inverse : singular matrix\n");
         return;
@@ -374,6 +380,51 @@ void MatrixInverseEx(
 	mOut = mTmp;
 }
 
+static void MatrixLookAt(
+						   MATRIX			&mOut,
+						   const VECTOR3	&vEye,
+						   const VECTOR3	&vAt,
+						   const VECTOR3	&vUp,
+						   bool rightHand)
+{
+	VECTOR3 f, s, u;
+	MATRIX	t;
+	int sign = rightHand ? 1 : -1;
+	f.x = sign * (vAt.x - vEye.x);
+	f.y = sign * (vAt.y - vEye.y);
+	f.z = sign * (vAt.z - vEye.z);
+	
+	MatrixVec3CrossProduct(s, f, vUp);
+	MatrixVec3CrossProduct(u, s, f);
+	// normalize when computation is done - not before (error noticed 
+	// when vectors were normalized before cross products.
+	MatrixVec3Normalize(f, f);
+	MatrixVec3Normalize(s, s);
+	MatrixVec3Normalize(u, u);	
+	
+	mOut.f[ 0] = s.x;
+	mOut.f[ 1] = u.x;
+	mOut.f[ 2] = -f.x;
+	mOut.f[ 3] = 0;
+	
+	mOut.f[ 4] = s.y;
+	mOut.f[ 5] = u.y;
+	mOut.f[ 6] = -f.y;
+	mOut.f[ 7] = 0;
+	
+	mOut.f[ 8] = s.z;
+	mOut.f[ 9] = u.z;
+	mOut.f[10] = -f.z;
+	mOut.f[11] = 0;
+	
+	mOut.f[12] = 0;
+	mOut.f[13] = 0;
+	mOut.f[14] = 0;
+	mOut.f[15] = 1;
+	
+	MatrixTranslation(t, -vEye.x, -vEye.y, -vEye.z);
+	MatrixMultiply(mOut, t, mOut);
+}
 
 void MatrixLookAtLH(
 	MATRIX			&mOut,
@@ -381,42 +432,8 @@ void MatrixLookAtLH(
 	const VECTOR3	&vAt,
 	const VECTOR3	&vUp)
 {
-	VECTOR3 f, vUpActual, s, u;
-	MATRIX	t;
-
-	f.x = vEye.x - vAt.x;
-	f.y = vEye.y - vAt.y;
-	f.z = vEye.z - vAt.z;
-
-	MatrixVec3Normalize(f, f);
-	MatrixVec3Normalize(vUpActual, vUp);
-	MatrixVec3CrossProduct(s, f, vUpActual);
-	MatrixVec3CrossProduct(u, s, f);
-
-	mOut.f[ 0] = s.x;
-	mOut.f[ 1] = u.x;
-	mOut.f[ 2] = -f.x;
-	mOut.f[ 3] = 0;
-
-	mOut.f[ 4] = s.y;
-	mOut.f[ 5] = u.y;
-	mOut.f[ 6] = -f.y;
-	mOut.f[ 7] = 0;
-
-	mOut.f[ 8] = s.z;
-	mOut.f[ 9] = u.z;
-	mOut.f[10] = -f.z;
-	mOut.f[11] = 0;
-
-	mOut.f[12] = 0;
-	mOut.f[13] = 0;
-	mOut.f[14] = 0;
-	mOut.f[15] = 1;
-
-	MatrixTranslation(t, -vEye.x, -vEye.y, -vEye.z);
-	MatrixMultiply(mOut, t, mOut);
+	MatrixLookAt(mOut, vEye, vAt, vUp, false);
 }
-
 
 void MatrixLookAtRH(
 	MATRIX			&mOut,
@@ -424,40 +441,7 @@ void MatrixLookAtRH(
 	const VECTOR3	&vAt,
 	const VECTOR3	&vUp)
 {
-	VECTOR3 f, vUpActual, s, u;
-	MATRIX	t;
-
-	f.x = vAt.x - vEye.x;
-	f.y = vAt.y - vEye.y;
-	f.z = vAt.z - vEye.z;
-
-	MatrixVec3Normalize(f, f);
-	MatrixVec3Normalize(vUpActual, vUp);
-	MatrixVec3CrossProduct(s, f, vUpActual);
-	MatrixVec3CrossProduct(u, s, f);
-
-	mOut.f[ 0] = s.x;
-	mOut.f[ 1] = u.x;
-	mOut.f[ 2] = -f.x;
-	mOut.f[ 3] = 0;
-
-	mOut.f[ 4] = s.y;
-	mOut.f[ 5] = u.y;
-	mOut.f[ 6] = -f.y;
-	mOut.f[ 7] = 0;
-
-	mOut.f[ 8] = s.z;
-	mOut.f[ 9] = u.z;
-	mOut.f[10] = -f.z;
-	mOut.f[11] = 0;
-
-	mOut.f[12] = 0;
-	mOut.f[13] = 0;
-	mOut.f[14] = 0;
-	mOut.f[15] = 1;
-
-	MatrixTranslation(t, -vEye.x, -vEye.y, -vEye.z);
-	MatrixMultiply(mOut, t, mOut);
+	MatrixLookAt(mOut, vEye, vAt, vUp, true);
 }
 
 
@@ -878,7 +862,6 @@ void MatrixQuaternionNormalize(QUATERNION &quat)
 	}
 }
 
-
 void MatrixRotationQuaternion(
 	MATRIX				&mOut,
 	const QUATERNION	&quat)
@@ -919,6 +902,40 @@ void MatrixRotationQuaternion(
 	mOut.f[14] = 0.0f;
 	mOut.f[15] = 1.0f;
 }
+
+void setQuaternion(QUATERNION &qOut, float x, float y, float z, float w)
+{
+	qOut.x = x;
+	qOut.y = y;
+	qOut.z = z;
+	qOut.w = w;
+}
+
+/* http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm */
+/* Note: a[i][j] replaced with m[i+4*j] for better readability */
+void MatrixToQuaternion(QUATERNION &qOut, const MATRIX &mIn)
+{
+    const float *m = mIn.f;    
+	float tr = m[0] + m[5] + m[10]; // trace of martix
+	if (tr > 0.0f){
+		float s = -0.5f / sqrtf(tr+ 1.0f);
+		setQuaternion(qOut, s * (m[1+4*2] - m[2+4*1]), s * (m[2+4*0] - m[0+4*2]), s * (m[0+4*1] - m[1+4*0]), 0.25f / s);
+	} else if( (m[0+0] > m[1+4*1] ) && ( m[0+4*0] > m[2+4*2]) ) {
+		float s = 2.0f * sqrtf( 1.0f + m[0+4*0] - m[1+4*1] - m[2+4*2]);
+		setQuaternion(qOut, 0.25f * s, (m[1+4*0] + m[0+4*1])/s,
+			  (m[2+4*0] + m[0+4*2])/s, (m[1+4*2] - m[2+4*1])/s );
+	}else if ( m[1+4*1] > m[2+4*2] ){
+		float s = 2.0f * sqrtf( 1.0f + m[1+4*1] - m[0+4*0] - m[2+4*2]);
+		setQuaternion(qOut, (m[1+4*0] + m[0+4*1])/s, 0.25f * s,
+			  (m[2+4*1] + m[1+4*2])/s, (m[2+4*0] - m[0+4*2])/s ); 
+	}else {
+		float s = 2.0f * sqrtf( 1.0f + m[2+4*2] - m[0+4*0] - m[1+4*1] );
+		setQuaternion(qOut, (m[2+4*0] + m[0+4*2])/s, (m[2+4*1] + m[1+4*2])/s,
+			  0.25f * s, (m[0+4*1] - m[1+4*0])/s );
+	}
+	//MatrixQuaternionNormalize(qOut);
+}
+
 
 
 void MatrixQuaternionMultiply(
