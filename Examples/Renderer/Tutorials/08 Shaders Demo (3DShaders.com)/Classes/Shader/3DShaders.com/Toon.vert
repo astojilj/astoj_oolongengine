@@ -17,12 +17,14 @@ uniform mediump mat4	u_TrasposeInverseModelMatrix;
 uniform mediump mat4	u_ModelMatrix;
 uniform mediump mat4	u_ModelViewMatrix;
 uniform mediump mat4	u_ViewMatrix;
+varying mediump vec2	v_TexCoord;
 
 varying vec3 v_Normal;
 
 void main(void)
 {
 	vec4 n = u_TrasposeInverseModelMatrix * a_Normal;
+	v_TexCoord = a_MultiTexCoord0;
 	v_Normal = normalize(vec3(u_ViewMatrix * n));
 	gl_Position = u_ModelViewProjectionMatrix * a_Vertex;
 }

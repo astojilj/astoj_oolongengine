@@ -17,7 +17,8 @@ class TransformInterpolatorPrivate;
 
 /*
  * TransformInterpolation is used for matrices animation  - sort of property animator.
- * Interpolating - animating values from one matrix to another using sland for rotation and lant for translation
+ * Interpolating - animating values from one matrix to another using slerp for rotation and lerp for translation.
+ * Combines MATRIX lerp and slerp, provides convenience step() and finished() to model animation interpolation
  */
 class TransformInterpolator {
 public:
