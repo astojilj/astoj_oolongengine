@@ -12,6 +12,8 @@
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
 		651B1C641178EA1600C027B2 /* DeviceType.mm in Sources */ = {isa = PBXBuildFile; fileRef = 651B1C631178EA1600C027B2 /* DeviceType.mm */; };
+		A10BB2081307CD6C00D7D665 /* Toon.frag in Sources */ = {isa = PBXBuildFile; fileRef = A10BB2071307CD6C00D7D665 /* Toon.frag */; };
+		A10BB2091307CDAA00D7D665 /* Toon.frag in Resources */ = {isa = PBXBuildFile; fileRef = A10BB2071307CD6C00D7D665 /* Toon.frag */; };
 		A182CA2F12CA7B6200F008CB /* piperGL11.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A182CA2E12CA7B6200F008CB /* piperGL11.cpp */; };
 		A182CA3C12CA909000F008CB /* piperGL20.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A182CA3B12CA909000F008CB /* piperGL20.cpp */; };
 		A18F5A6712C7F484009EB720 /* EAGLView2.m in Sources */ = {isa = PBXBuildFile; fileRef = A18F5A6612C7F484009EB720 /* EAGLView2.m */; };
@@ -19,13 +21,11 @@
 		A1B416AC12DE45A000EB6F1D /* transformInterpolator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1B416AB12DE45A000EB6F1D /* transformInterpolator.cpp */; };
 		A1CBEB1612CF1C2B008684BB /* piper_p.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1CBEB1412CF1C2B008684BB /* piper_p.cpp */; };
 		A1CBECA112D05DF9008684BB /* shaderData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A1CBEC9F12D05DF9008684BB /* shaderData.cpp */; };
-		A1CBED2D12D0F233008684BB /* Toon.frag in Sources */ = {isa = PBXBuildFile; fileRef = A1CBED2B12D0F233008684BB /* Toon.frag */; };
 		A1CBED2E12D0F233008684BB /* Toon.vert in Sources */ = {isa = PBXBuildFile; fileRef = A1CBED2C12D0F233008684BB /* Toon.vert */; };
 		A1CBED3512D0F268008684BB /* Color.frag in Sources */ = {isa = PBXBuildFile; fileRef = A1CBED3312D0F268008684BB /* Color.frag */; };
 		A1CBED3612D0F268008684BB /* Color.vert in Sources */ = {isa = PBXBuildFile; fileRef = A1CBED3412D0F268008684BB /* Color.vert */; };
 		A1CBED3712D0F273008684BB /* Color.frag in Resources */ = {isa = PBXBuildFile; fileRef = A1CBED3312D0F268008684BB /* Color.frag */; };
 		A1CBED3812D0F273008684BB /* Color.vert in Resources */ = {isa = PBXBuildFile; fileRef = A1CBED3412D0F268008684BB /* Color.vert */; };
-		A1CBED3B12D0F273008684BB /* Toon.frag in Resources */ = {isa = PBXBuildFile; fileRef = A1CBED2B12D0F233008684BB /* Toon.frag */; };
 		A1CBED3C12D0F273008684BB /* Toon.vert in Resources */ = {isa = PBXBuildFile; fileRef = A1CBED2C12D0F233008684BB /* Toon.vert */; };
 		A1CBED4212D111FF008684BB /* Texture.frag in Sources */ = {isa = PBXBuildFile; fileRef = A1CBED4012D111FF008684BB /* Texture.frag */; };
 		A1CBED4312D111FF008684BB /* Texture.vert in Sources */ = {isa = PBXBuildFile; fileRef = A1CBED4112D111FF008684BB /* Texture.vert */; };
@@ -203,6 +203,7 @@
 		651B1C621178EA1600C027B2 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceType.h; sourceTree = "<group>"; };
 		651B1C631178EA1600C027B2 /* DeviceType.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceType.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ReadBlend-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ReadBlend-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		A10BB2071307CD6C00D7D665 /* Toon.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Toon.frag; sourceTree = "<group>"; };
 		A182CA2D12CA7B6200F008CB /* piper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = piper.h; sourceTree = "<group>"; };
 		A182CA2E12CA7B6200F008CB /* piperGL11.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = piperGL11.cpp; sourceTree = "<group>"; };
 		A182CA3A12CA909000F008CB /* piperGL20.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = piperGL20.h; sourceTree = "<group>"; };
@@ -238,7 +239,6 @@
 		A1CBEB1512CF1C2B008684BB /* piper_p.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = piper_p.h; sourceTree = "<group>"; };
 		A1CBEC9F12D05DF9008684BB /* shaderData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shaderData.cpp; sourceTree = "<group>"; };
 		A1CBECA012D05DF9008684BB /* shaderData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shaderData.h; sourceTree = "<group>"; };
-		A1CBED2B12D0F233008684BB /* Toon.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Toon.frag; path = "../../Renderer/Tutorials/08 Shaders Demo (3DShaders.com)/Classes/Shader/3DShaders.com/Toon.frag"; sourceTree = SOURCE_ROOT; };
 		A1CBED2C12D0F233008684BB /* Toon.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Toon.vert; path = "../../Renderer/Tutorials/08 Shaders Demo (3DShaders.com)/Classes/Shader/3DShaders.com/Toon.vert"; sourceTree = SOURCE_ROOT; };
 		A1CBED3312D0F268008684BB /* Color.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Color.frag; path = "../../Renderer/Tutorials/08 Shaders Demo (3DShaders.com)/Classes/Shader/Basic/Color.frag"; sourceTree = SOURCE_ROOT; };
 		A1CBED3412D0F268008684BB /* Color.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Color.vert; path = "../../Renderer/Tutorials/08 Shaders Demo (3DShaders.com)/Classes/Shader/Basic/Color.vert"; sourceTree = SOURCE_ROOT; };
@@ -998,7 +998,6 @@
 				A1CBED4112D111FF008684BB /* Texture.vert */,
 				A1CBED3312D0F268008684BB /* Color.frag */,
 				A1CBED3412D0F268008684BB /* Color.vert */,
-				A1CBED2B12D0F233008684BB /* Toon.frag */,
 				A1CBED2C12D0F233008684BB /* Toon.vert */,
 			);
 			name = Shaders;
@@ -1031,6 +1030,7 @@
 				651B1FD31178F97500C027B2 /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				A10BB2071307CD6C00D7D665 /* Toon.frag */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -2162,11 +2162,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A10BB2091307CDAA00D7D665 /* Toon.frag in Resources */,
 				A1CBED4412D11204008684BB /* Texture.frag in Resources */,
 				A1CBED4512D11204008684BB /* Texture.vert in Resources */,
 				A1CBED3712D0F273008684BB /* Color.frag in Resources */,
 				A1CBED3812D0F273008684BB /* Color.vert in Resources */,
-				A1CBED3B12D0F273008684BB /* Toon.frag in Resources */,
 				A1CBED3C12D0F273008684BB /* Toon.vert in Resources */,
 				BC8517DB10962CB800721ADB /* Default.png in Resources */,
 				BC8517DD10962CB800721ADB /* icon.png in Resources */,
@@ -2344,13 +2344,13 @@
 				A182CA3C12CA909000F008CB /* piperGL20.cpp in Sources */,
 				A1CBEB1612CF1C2B008684BB /* piper_p.cpp in Sources */,
 				A1CBECA112D05DF9008684BB /* shaderData.cpp in Sources */,
-				A1CBED2D12D0F233008684BB /* Toon.frag in Sources */,
 				A1CBED2E12D0F233008684BB /* Toon.vert in Sources */,
 				A1CBED3512D0F268008684BB /* Color.frag in Sources */,
 				A1CBED3612D0F268008684BB /* Color.vert in Sources */,
 				A1CBED4212D111FF008684BB /* Texture.frag in Sources */,
 				A1CBED4312D111FF008684BB /* Texture.vert in Sources */,
 				A1B416AC12DE45A000EB6F1D /* transformInterpolator.cpp in Sources */,
+				A10BB2081307CD6C00D7D665 /* Toon.frag in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

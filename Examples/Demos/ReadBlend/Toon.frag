@@ -17,9 +17,7 @@ uniform sampler2D		s_texture;
 void main (void)
 {
 
-	vec2 uv = v_TexCoord - (1.0 * floor(v_TexCoord/1.0));
-	uv = uv * 0.5;
-	
+	vec2 uv = v_TexCoord;	
 	float Edge = 0.40;
 	float Phong = 0.95;
 
@@ -28,7 +26,7 @@ void main (void)
 		
 	vec4 texture = texture2D(s_texture, uv);	
 	if (abs(f) < Edge) {
-		gl_FragColor = texture * 0.4;
+		gl_FragColor = texture * 0.5;
 	} else if (f < Phong) {
 		vec4 color1 = texture;
 		gl_FragColor = color1;
