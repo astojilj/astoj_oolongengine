@@ -24,7 +24,7 @@ not be misrepresented as being the original software.
 
 #ifdef __APPLE__
 #include <TargetConditionals.h>
-#if (TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1)
+#if defined (USE_ASM_MATRIX_COMPUTATION) && ((TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1))
 
 
 #include "utility_impl.h"

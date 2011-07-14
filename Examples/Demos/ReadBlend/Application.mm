@@ -110,7 +110,6 @@ bool CShell::InitApplication()
 	
 	
 	char* name="PhysicsAnimationBakingDemo.blend";
-	//char* name="Ragdoll.blend";
 
 	char fullName[512];
 	
@@ -149,7 +148,7 @@ bool CShell::InitApplication()
 		{
 			btAlignedObjectArray<const char*> keyActors;
 			keyActors.push_back("MESphere");
-			keyActors.push_back("MECube.013");
+			keyActors.push_back("MECube.017");
 			blendReader->convertAllObjects(verboseDumpAllTypes, keyActors);
 		} else {
 			printf("Error: invalid/unreadable file: %s\n",fullName);
@@ -199,11 +198,11 @@ bool CShell::InitApplication()
 	glDisable(GL_COLOR_MATERIAL);
 	
 	// target initialization - what needs to be hit by the ball and where to look
-	btCollisionObject *target = blendReader->collisionObject("MECube.013");
+	btCollisionObject *target = blendReader->collisionObject("MECube.017");
 	if (target) {
 		vTarget = target->getWorldTransform().getOrigin().m_floats;
 	} else {
-		printf("Object MECube.013 used for target not found in blender file");
+		printf("Object MECube.017 used for target not found in blender file");
 		assert(false);
 	}
 	sceneSlowdownWhileAnimatingCamera = 0; // no stepping the model while initial camera animation
@@ -296,6 +295,7 @@ bool CShell::UpdateScene()
 
 bool CShell::RenderScene()
 {
+    Piper::instance()->initFrame();	
 	for (int i=0;i<blendReader->m_graphicsObjects.size();i++)
 	{
 		blendReader->m_graphicsObjects[i].render();

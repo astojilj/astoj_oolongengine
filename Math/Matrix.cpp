@@ -31,13 +31,17 @@ subject to the following restrictions:
 
 #ifdef __APPLE__
 #include <TargetConditionals.h>
-#if (TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1)
-#ifdef _ARM_ARCH_7
-#include "neonmath/neon_matrix_impl.h"
-#else
-#include "vfpmath/matrix_impl.h"
+
+#ifdef USE_ASM_MATRIX_COMPUTATION
+#	if (TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1)
+#		ifdef _ARM_ARCH_7
+#			include "neonmath/neon_matrix_impl.h"
+#		else
+#			include "vfpmath/matrix_impl.h"
+#		endif
+#	endif
 #endif
-#endif
+
 #endif
 
 static const MATRIX	c_mIdentity((float [16])
@@ -63,13 +67,14 @@ void MatrixMultiply(
 	const MATRIX	&mA,
 	const MATRIX	&mB)
 {
-#if (TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1)
+	
+#if defined (USE_ASM_MATRIX_COMPUTATION) && ((TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1))
 	#ifdef _ARM_ARCH_7
 		NEON_Matrix4Mul( mA.f, mB.f, mOut.f );
 	#else
 		Matrix4Mul(mA.f,
-					mB.f,
-					mOut.f);
+				mB.f,
+				mOut.f);
 	#endif
 #else	
 	MATRIX mRet;
@@ -104,7 +109,8 @@ void MatrixVec4Multiply(VECTOR4			&vOut,
 						const VECTOR4	&vIn,
 						const MATRIX	&mIn)
 {
-#if (TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1)
+
+#if defined (USE_ASM_MATRIX_COMPUTATION) && ((TARGET_IPHONE_SIMULATOR == 0) && (TARGET_OS_IPHONE == 1))
 	#ifdef _ARM_ARCH_7
 		NEON_Matrix4Vector4Mul( mIn.f, &vIn.x, &vOut.x );
 	#else

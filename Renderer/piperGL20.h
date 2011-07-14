@@ -29,6 +29,7 @@ public:
 	void multMatrix(const MATRIX &matrix, Mode mode);
 	void glDrawArrays (GLenum mode, GLint first, GLsizei count);
 	void glDrawElements (GLenum mode, GLsizei count, GLenum type, const GLvoid* indices);
+	void initFrame();
 	//@end_reimp
 
 private:

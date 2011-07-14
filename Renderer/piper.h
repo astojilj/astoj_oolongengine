@@ -48,6 +48,10 @@ public:
 		::glDrawElements (mode, count, type, indices);
 	}
 	
+	virtual void initFrame()
+	{
+	}
+	
 	/* instance needs to be created with initInstance() first. This could return 0 */
 	static Piper *instance();
 

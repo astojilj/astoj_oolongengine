@@ -56,7 +56,6 @@ char *shaders_name[] = {
 int total_shaders = sizeof(shaders_name) / sizeof(shaders_name[0]);
 int active_shader;
 
-
 // ^^ end of block copied from Oolong Engine2/Examples/Renderer/Tutorials/08 Shaders Demo (3DShaders.com)/Classes/Application.mm
 
 class ShaderManager 
@@ -110,6 +109,12 @@ void PiperGL20::init()
 	shaderManager = new ShaderManager;
 }
 
+void PiperGL20::initFrame()
+{
+	ShaderData *shader = shaderManager->shaderAt(active_shader);
+	glUseProgram(shader->uiProgramObject);	
+}
+
 PiperGL20::~PiperGL20()
 {
 	delete shaderManager;
@@ -146,8 +151,6 @@ void PiperGL20::setupChangedVariables()
 	MatrixTranspose(mTIM, mTIM);
 	
 	ShaderData *shader = shaderManager->shaderAt(active_shader);
-	glUseProgram(shader->uiProgramObject);
-	
 	// Then passes the matrix to that variable
 	glUniformMatrix4fv( shader->PMVMatrixHandle, 1, GL_FALSE, mMVP.f);
 	glUniformMatrix4fv( shader->MVMatrixHandle, 1, GL_FALSE, mModelView.f);
