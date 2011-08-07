@@ -15,8 +15,17 @@ subject to the following restrictions:
 #ifndef DISPLAYTEXT_H_
 #define DISPLAYTEXT_H_
 
+#ifndef QT_BUILD
 #include <TargetConditionals.h>
 #include <Availability.h>
+#endif
+
+#ifdef QT_BUILD
+#define OPENGL_ES_2_0
+#elif __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#define OPENGL_ES_2_0
+#endif
+
 #include "MemoryManager.h"
 
 #define DISPLAYTEXT_MAX_WINDOWS				(512)
@@ -298,7 +307,7 @@ int Flush();
 
 private:
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 	// Declare the fragment and vertex shaders.
 	GLuint uiFragShader, uiVertShader;		// Used to hold the fragment and vertex shader handles
 	GLuint uiProgramObject;					// Used to hold the program handle (made out of the two previous shaders)

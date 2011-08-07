@@ -90,6 +90,7 @@ class MATRIX
 public:
 	MATRIX()
 	{
+		memset(&f, 0, 16 * sizeof(float));
 	}
 	MATRIX(const float m[16]) 
 	{

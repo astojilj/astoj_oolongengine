@@ -2,8 +2,8 @@
  *  piper_p.cpp
  *  ReadBlend
  *
- *  Created by astoj@rocketmail.com on 12/28/10.
- *  Copyright 2010 astoj@rocketmail.com. All rights reserved.
+ *  Created by astojilj@gmail.com on 12/28/10.
+ *  Copyright 2010-2011 astojilj@gmail.com. All rights reserved.
  *
  */
 
@@ -15,9 +15,9 @@
 
 const unsigned char stackSize(1 << MAX_STACK_DEPTH_LOG_2);
 
-MatrixStack::MatrixStack()
+MatrixStack::MatrixStack() :
+	topIndex(0)
 {
-	memset(this, 0, sizeof(this));
 }
 
 /* Allowed to push, but all pushes above 1 << MAX_STACK_DEPTH_LOG_2 ends to same, pop comes back */
@@ -63,9 +63,12 @@ void Piper::initInstance(bool fixedPipeline)
 {
 	delete _instance;
 	_instance = 0;
+#ifndef QT_BUILD //! Support only for OpenGL ES 2.0 in MeeGo for start
 	if (fixedPipeline) {
 		_instance = new PiperGL11;
-	} else {
+	} else
+#endif
+	{
 		_instance = new PiperGL20;
 	}
 }

@@ -13,17 +13,28 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
+#ifdef __APPLE__
 #include <TargetConditionals.h>
 #include <Availability.h>
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#define OPENGL_ES_2_0
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 #else
 #import <OpenGLES/ES1/gl.h>
 #import <OpenGLES/ES1/glext.h>
 #endif
+#endif
 
+#ifdef QT_BUILD
+#define OPENGL_ES_2_0
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
+// copied from GLES/gl.h, as missing in <GLES2/gl2.h> in MeeGo. FIXME: Use BlendSeparate functions instead
+#define GL_BLEND_DST                      0x0BE0
+#define GL_BLEND_SRC                      0x0BE1
+#endif
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -37,7 +48,7 @@ subject to the following restrictions:
 
 #include "DisplayText.h"
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 extern int __OPENGLES_VERSION;
 #endif
 
@@ -112,7 +123,7 @@ int CDisplayText::Flush()
 		_ASSERT(nTris <= (DISPLAYTEXT_MAX_RENDERABLE_LETTERS*2));
 		_ASSERT((nVtx % 4) == 0);
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 		
 		if( __OPENGLES_VERSION >= 2 )
 		{
@@ -135,14 +146,15 @@ int CDisplayText::Flush()
 		}
 		else 
 #endif
-		{		
+		{
+#ifndef QT_BUILD
 			/* Draw triangles */
 			glVertexPointer(3,		VERTTYPEENUM,		sizeof(SDisplayTextAPIVertex), &m_pVtxCache[nVtxBase].sx);
 			glColorPointer(4,		VERTTYPEENUM,	sizeof(SDisplayTextAPIVertex), &m_pVtxCache[nVtxBase].r);
 			glTexCoordPointer(2,	VERTTYPEENUM,		sizeof(SDisplayTextAPIVertex), &m_pVtxCache[nVtxBase].tu);
 
+#endif
 		}
-		
 		glDrawElements(GL_TRIANGLES, nTris * 3, GL_UNSIGNED_SHORT, m_pwFacesFont);
 		//glDrawArrays(GL_TRIANGLES,  0, 3);
 		
@@ -365,6 +377,7 @@ bool CDisplayText::APIUpLoad4444(unsigned int dwTexID, unsigned char *pSource, u
 
 void CDisplayText::DrawBackgroundWindowUP(unsigned int dwWin, SDisplayTextAPIVertex *pVtx, const bool bIsOp, const bool bBorder)
 {
+#ifndef QT_BUILD
 	const unsigned short c_pwFacesWindow[] =
 	{
 		0,1,2, 2,1,3, 2,3,4, 4,3,5, 4,5,6, 6,5,7, 5,8,7, 7,8,9, 8,10,9, 9,10,11, 8,12,10, 8,13,12,
@@ -403,6 +416,7 @@ void CDisplayText::DrawBackgroundWindowUP(unsigned int dwWin, SDisplayTextAPIVer
 	}
 
 	/* Restore render states (need to be translucent to draw the text) */
+#endif
 }
 
 //
@@ -428,12 +442,13 @@ void CDisplayText::APIRenderStates(int nAction)
 		//glGetbooleanv(GL_VERTEX_ARRAY,		&bVertexPointerEnabled);
 		//glGetbooleanv(GL_COLOR_ARRAY,			&bColorPointerEnabled);
 		//glGetbooleanv(GL_TEXTURE_COORD_ARRAY,	&bTexCoorPointerEnabled);
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 		if( __OPENGLES_VERSION >= 2 ) {
 		}
 		else 
 #endif
 		{		
+#ifndef QT_BUILD
 			bVertexPointerEnabled = glIsEnabled(GL_VERTEX_ARRAY);
 			bColorPointerEnabled = glIsEnabled(GL_COLOR_ARRAY);
 			bTexCoorPointerEnabled = glIsEnabled(GL_TEXTURE_COORD_ARRAY);
@@ -445,8 +460,8 @@ void CDisplayText::APIRenderStates(int nAction)
 			
 			glActiveTexture(GL_TEXTURE1);
 			bTextureEnabled1 = glIsEnabled(GL_TEXTURE_2D);
+#endif
 		}
-
 		bCullFace = glIsEnabled(GL_CULL_FACE);
 		bDepthTest = glIsEnabled(GL_DEPTH_TEST);
 //		bVertexProgram = glIsEnabled(GL_IMG_vertex_program);
@@ -457,7 +472,7 @@ void CDisplayText::APIRenderStates(int nAction)
 		glGetIntegerv(GL_BLEND_SRC, &iSrcBlend);
       
 		
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 		if( __OPENGLES_VERSION >= 2 ) {
 			//glBindBuffer( GL_ARRAY_BUFFER, 0 );
 			glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
@@ -465,6 +480,7 @@ void CDisplayText::APIRenderStates(int nAction)
 		else 
 #endif
 		{
+#ifndef QT_BUILD
 			/* Save matrices */
 			glGetIntegerv(GL_MATRIX_MODE, &iMatrixMode);
 			
@@ -472,8 +488,8 @@ void CDisplayText::APIRenderStates(int nAction)
 			glPushMatrix();
 			glMatrixMode(GL_PROJECTION);
 			glPushMatrix();
-		}		
-			
+#endif
+		}
 		/******************************
 		** SET DisplayText RENDER STATES **
 		******************************/
@@ -496,14 +512,15 @@ void CDisplayText::APIRenderStates(int nAction)
 		Matrix.f[15] = f2vt(1.0f);
 			
 			
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 		if( __OPENGLES_VERSION >= 2 ) {
 			glUseProgram(uiProgramObject);
 			glUniformMatrix4fv( PMVMatrixHandle, 1, GL_FALSE, Matrix.f);
 		}
 		else 
 #endif
-		{			
+		{
+#ifndef QT_BUILD
 			/* Set matrix mode so that screen coordinates can be specified */
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
@@ -512,22 +529,23 @@ void CDisplayText::APIRenderStates(int nAction)
 			
 			glLoadMatrixf(Matrix.f);
 			glDisable(GL_LIGHTING);
+#endif
 		}
-					
 			
 		/* Culling */
 		glEnable(GL_CULL_FACE);
 		glFrontFace(GL_CW);
 		glCullFace(GL_FRONT);
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 		if( __OPENGLES_VERSION >= 2 ) {
 			glActiveTexture(GL_TEXTURE0);
 			glUniform1i( TextureHandle, 0 );
 		}
 		else 		
 #endif
-		{	
+		{
+#ifndef QT_BUILD
 			/* Set client states */
 			glEnableClientState(GL_VERTEX_ARRAY);
 			glEnableClientState(GL_COLOR_ARRAY);
@@ -539,19 +557,21 @@ void CDisplayText::APIRenderStates(int nAction)
 			glDisable(GL_TEXTURE_2D);
 			glActiveTexture(GL_TEXTURE0);
 			glEnable(GL_TEXTURE_2D);
+#endif
 		}
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 		if( __OPENGLES_VERSION >= 2 ) {
 		}
 		else 
 #endif
-		{			
+		{
+#ifndef QT_BUILD
 			glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
 			/* Disable fog */
 			glDisable(GL_FOG);
+#endif
 		}
-
 		/* Blending mode */
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -565,12 +585,13 @@ void CDisplayText::APIRenderStates(int nAction)
 		break;
 
 	case 1:
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 		if( __OPENGLES_VERSION >= 2 ) {
 		}
 		else 
 #endif
-		{				
+		{
+#ifndef QT_BUILD
 			/* Restore render states */
 			if (!bVertexPointerEnabled)		
 				glDisableClientState(GL_VERTEX_ARRAY);
@@ -584,14 +605,15 @@ void CDisplayText::APIRenderStates(int nAction)
 				glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 			else
 				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+#endif
 		}
-
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 		if( __OPENGLES_VERSION >= 2 ) {
 		}
 		else 
 #endif
 		{
+#ifndef QT_BUILD
 			/* Restore matrix mode & matrix */
 			glMatrixMode(GL_PROJECTION);
 			glPopMatrix();
@@ -607,8 +629,8 @@ void CDisplayText::APIRenderStates(int nAction)
 			bTextureEnabled1 ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
 			glActiveTexture(GL_TEXTURE0);
 			bTextureEnabled0 ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
+#endif
 		}
-			
 
 		// Restore some values
 		if(!bCullFace)		glDisable(GL_CULL_FACE);
@@ -686,7 +708,7 @@ void CDisplayText::APIDrawLogo(unsigned int uLogoToDisplay, int nPos)
 		pVertices = VerticesLeft;
 	}
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 	if( __OPENGLES_VERSION >= 2 ) {
 		MATRIX mx;
 		MatrixIdentity(mx);
@@ -703,8 +725,8 @@ void CDisplayText::APIDrawLogo(unsigned int uLogoToDisplay, int nPos)
 	}
 	else 
 #endif		
-//#else
 	{	
+#ifndef QT_BUILD
 		//Matrices
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
@@ -718,15 +740,15 @@ void CDisplayText::APIDrawLogo(unsigned int uLogoToDisplay, int nPos)
 		glActiveTexture(GL_TEXTURE0);
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, tex);
+#endif
 	}
-//#endif
 	
 
 
 	glEnable (GL_BLEND);
 	glBlendFunc (GL_ZERO, GL_SRC_COLOR);
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 	
 	if( __OPENGLES_VERSION >= 2 )
 	{
@@ -746,6 +768,7 @@ void CDisplayText::APIDrawLogo(unsigned int uLogoToDisplay, int nPos)
 	else 
 #endif	// Vertices
 	{
+#ifndef QT_BUILD
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(3,VERTTYPEENUM,0,pVertices);
 
@@ -762,8 +785,8 @@ void CDisplayText::APIDrawLogo(unsigned int uLogoToDisplay, int nPos)
 		glDisableClientState(GL_COLOR_ARRAY);
 		glClientActiveTexture(GL_TEXTURE0);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+#endif
 	}
-
 
 
 	// Restore render states

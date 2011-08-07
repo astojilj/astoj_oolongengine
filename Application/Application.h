@@ -46,7 +46,7 @@ public:
 };
 
 
-#endif APPLICATION_H_
+#endif // APPLICATION_H_
 
 
 

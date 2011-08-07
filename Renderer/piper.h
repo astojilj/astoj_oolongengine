@@ -13,6 +13,9 @@
 #include <Mathematics.h>
 #include "../../Math/Matrix.h"
 
+#ifdef QT_BUILD // first version for Qt only Opengl ES 2.0
+#include <GLES2/gl2.h>
+#else
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
@@ -21,7 +24,7 @@ extern int __OPENGLES_VERSION;
 #import <OpenGLES/ES1/gl.h>
 #import <OpenGLES/ES1/glext.h>
 #endif
-
+#endif
 /* Collecting and constructing input for graphics pipeline */
 class Piper
 {
@@ -66,6 +69,5 @@ private:
 	static void initInstance(bool fixedPipeline = false);
 	friend class CShell; // only has access to initInstance()
 };
-
 
 #endif //PIPER_PIPER_H

@@ -15,8 +15,10 @@ subject to the following restrictions:
 #ifndef APP_H_
 #define APP_H_
 
+#ifdef __APPLE__
 #include <TargetConditionals.h>
 #include <Availability.h>
+#endif
 
 #include "../Application/Application.h"
 

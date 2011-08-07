@@ -18,13 +18,21 @@ subject to the following restrictions:
 //#include "Context.h"
 //#include "GraphicsDevice.h"
 //#include <OpenGLES/EAGL.h>
+#ifndef QT_BUILD
 #include <TargetConditionals.h>
 #include <Availability.h>
+#else
+#define BUILD_OPENGLES_2_0
+#include <GLES2/gl2.h>
+#endif
+
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#define BUILD_OPENGLES_2_0
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
+#endif
 
-
+#ifdef BUILD_OPENGLES_2_0
 #include <string>
 //#include "../Error.h"
 

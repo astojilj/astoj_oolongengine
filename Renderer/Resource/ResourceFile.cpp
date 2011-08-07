@@ -28,6 +28,7 @@ subject to the following restrictions:
 */
 #include "ResourceFile.h"
 #include <stdio.h>
+#include <string.h>
 
 #include "MemoryFile.h"
 

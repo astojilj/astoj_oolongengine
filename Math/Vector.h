@@ -15,7 +15,12 @@ subject to the following restrictions:
 #ifndef VECTOR_H_
 #define VECTOR_H_
 
+#ifdef QT_BUILD
+#include <GLES2/gl2.h>
+#else
 #include <OpenGLES/ES1/gl.h>
+#endif
+
 #include <math.h>
 
 //#include "Matrix.h"

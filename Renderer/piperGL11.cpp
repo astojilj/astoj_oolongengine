@@ -7,6 +7,7 @@
  *
  */
 
+#ifndef QT_BUILD // only OpenGL ES 2.0 for Qt in first version
 #include "piperGL11.h"
 #include <stdio.h>
 
@@ -67,3 +68,4 @@ void PiperGL11::multMatrix(const MATRIX &matrix, Mode mode)
 	if (setMode(mode))
 		glMultMatrixf(matrix.f);
 }
+#endif

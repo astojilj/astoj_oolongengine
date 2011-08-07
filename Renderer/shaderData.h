@@ -10,6 +10,7 @@
 #ifndef __ShaderData_H__
 #define __ShaderData_H__
 
+#ifndef QT_BUILD
 #include <TargetConditionals.h>
 #include <Availability.h>
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
@@ -19,6 +20,7 @@
 #import <OpenGLES/ES1/gl.h>
 #import <OpenGLES/ES1/glext.h>
 #endif
+#endif // QT_BUILD
 #include "Mathematics.h"
 
 // Index to bind the attributes to vertex shaders

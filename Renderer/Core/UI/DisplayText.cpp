@@ -13,19 +13,29 @@ subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 */
 
+#ifdef QT_BUILD
+#define OPENGL_ES_2_0
+#elif __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#define OPENGL_ES_2_0
+#endif
+
+#ifndef QT_BUILD
 #include <TargetConditionals.h>
 #include <Availability.h>
+#endif
+
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
-
+#include <stdlib.h>
 
 #include "DeviceType.h"
 #include "Mathematics.h"
 #include "Geometry.h"
 #include "Macros.h"
 #include "MemoryManager.h"
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+
+#ifdef OPENGL_ES_2_0
 #include "Shader.h"
 #endif
 
@@ -46,14 +56,14 @@ subject to the following restrictions:
 #define DisplayText_ADJUST_SIZE	64
 #define DisplayText_NO_BORDER	128
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 extern int __OPENGLES_VERSION;
 #endif
 
 float WindowWidth = 320.0f;
 float WindowHeight = 480.0f;
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 // This ties in with the shader attribute to link to openGL, see pszVertShader.
 static const char* pszAttribs[] = { "myVertex", "myColor", "myTexCoord" };
 
@@ -100,7 +110,7 @@ CDisplayText::CDisplayText()
 	// Initialise all variables
 	memset(this, 0, sizeof(*this));
 	
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#ifdef OPENGL_ES_2_0
 	if( __OPENGLES_VERSION >= 2 ) {
 		if(ShaderLoadSourceFromMemory( fsh, GL_FRAGMENT_SHADER, &uiFragShader) == 0)
 			printf("Loading the fragment shader fails");
@@ -122,7 +132,7 @@ CDisplayText::CDisplayText()
 CDisplayText::~CDisplayText()
 {
 #if !defined (DISABLE_DISPLAYTEXT)
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000	
+#ifdef OPENGL_ES_2_0
 	if( __OPENGLES_VERSION >= 2 )
 	{
 		// Frees the OpenGL handles for the program and the 2 shaders

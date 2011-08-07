@@ -20,7 +20,14 @@
 #define SUCCESS			1
 #define FAIL			0
 
+
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 30000
+#define USE_SHADER_CPP
+#elif defined(QT_BUILD)
+#define USE_SHADER_CPP
+#endif
+
+#ifdef USE_SHADER_CPP
 /*!***************************************************************************
  @Function		ShaderLoadSourceFromMemory
  @Input			pszShaderCode	shader source code
@@ -198,7 +205,7 @@ unsigned int CreateProgram(	GLuint* const pProgramObject,
 	}
 
 	// Actually use the created program.
-	glUseProgram(*pProgramObject);
+	// glUseProgram(*pProgramObject);
 
 	return SUCCESS;
 }

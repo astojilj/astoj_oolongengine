@@ -7,10 +7,15 @@
  *
  */
 
-#include "ShaderData.h"
+#include "shaderData.h"
 #include "Pathes.h"
 #include "ResourceFile.h"
 #include "Shader.h"
+#include <stdio.h>
+
+#ifdef QT_BUILD
+#include <GLES2/gl2.h>
+#endif
 
 // This ties in with the shader attribute to link to openGL, see pszVertShader.
 const char* pszAttribs[] = { "a_Vertex", "a_MultiTexCoord0", "a_Normal", "a_Tangent", "a_Binormal" };
@@ -24,9 +29,9 @@ ShaderData::ShaderData( const char *vertShaderFilename, const char *fragShaderFi
 	
 	/* Gets the Data Path */	
 	if(ShaderLoadFromFile("blank",fragShaderFilename, GL_FRAGMENT_SHADER, 0, &uiFragShader) == 0)
-		printf("Loading the fragment shader fails");
+		printf("Loading the fragment shader fails:%s", fragShaderFilename);
 	if(ShaderLoadFromFile("blank", vertShaderFilename, GL_VERTEX_SHADER, 0, &uiVertShader) == 0)
-		printf("Loading the vertex shader fails");
+		printf("Loading the vertex shader fails:%s", vertShaderFilename);
 	
 	CreateProgram(&uiProgramObject, uiVertShader, uiFragShader, pszAttribs, sizeof(pszAttribs)/sizeof(pszAttribs[0]) );	
 	
